@@ -17,7 +17,7 @@ To run the JavaScript API, which is written using Node, and a Postgres database,
 
 * Clone this repo
 * From the repo directory on your machine, update the `database-schema` submodule with this command: `git submodule update --init`
-* Start the database and Node server using Docker compose: `docker compose up`
+* Start the database and Node server using Docker compose: `docker-compose up`
 
 You should now be able to access the the JavaScript API at [http://127.0.0.1:8080](http://127.0.0.1:8080). If you're running Docker Toolbox on Windows (instead of Docker for Windows), which may be required if you use a Home edition of Windows, the address will be [http://192.168.99.100:8080](http://192.168.99.100:8080).
 
