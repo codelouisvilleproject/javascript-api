@@ -1,4 +1,4 @@
-# Code Louisvile JS API
+# Code Louisvile JS API is awesome!
 
 Over the course of the Winter 2018 session, this will become the JavaScript backend and frontend powering our fitness tracker site!
 
