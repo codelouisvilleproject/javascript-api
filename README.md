@@ -2,6 +2,7 @@
 
 Over the course of the Winter games of the 2018 session, this will become the JavaScript backend and frontend powering our fitness tracker site!
 
+
 ## Running Locally
 
 ### Requirements
