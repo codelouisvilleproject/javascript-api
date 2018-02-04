@@ -20,7 +20,7 @@ produces:
 paths:
   /users:
     # binds a127 app logic to a route
-    x-swagger-router-controller: users
+    x-swagger-router-controller: userController
     get:
       description: Returns json list of users
       # used as the method name of the controller
@@ -31,6 +31,26 @@ paths:
           description: Success
           schema:
             # a pointer to a definition
+            $ref: "#/definitions/GetUsersResponse"
+        # responses may fall through to errors
+        default:
+          description: Error
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+    post:
+      description: Handles POST for /users
+      operationId: addUser
+      parameters:
+        - name: userInfo
+          in: body
+          description: add user information
+          required: true
+          schema:
+            $ref: "#/definitions/User"
+      responses:
+        "200":
+          description: Success
+          schema:
             $ref: "#/definitions/GetUsersResponse"
         # responses may fall through to errors
         default:

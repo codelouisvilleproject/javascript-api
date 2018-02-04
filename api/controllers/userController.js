@@ -6,6 +6,7 @@ var db = require('../db')
 module.exports = {
   usersPut: usersPut,
   usersGet: usersGet,
+  addUser: addUser,
   users_database: users_database
 };
 
@@ -37,4 +38,8 @@ function users_database(req, res) {
 
 function usersGet(req, res) {
   //define variables expected in users object
+}
+
+function addUser(req, res) {
+  
 }
