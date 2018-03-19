@@ -52,6 +52,7 @@ function usersPut(req, res) {
   var birthYear = req.swagger.params.userInfo.value.birthYear;
   var birthDate = util.format('%d-%d-%d,', birthYear, birthMonth, birthDay);
   var email = req.swagger.params.userInfo.value.email;
+  
   //authorisation: check if ids match
   if (id != req.user.id) {
     res.json({'message': 'User not authorized'}, 403);
