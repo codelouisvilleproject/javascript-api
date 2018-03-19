@@ -95,7 +95,7 @@ paths:
           description: Success
           schema:
             # a pointer to a definition
-            $ref: "#/definitions/UsersToken"
+            $ref: "#/definitions/UserWithToken"
         default:
           description: Error
           schema:
@@ -218,6 +218,13 @@ definitions:
         properties:
           id: 
             type: integer
+  UserWithToken:
+    allOf: 
+      - $ref: "#/definitions/UserWithId"
+      - type: object
+        properties:
+          token: 
+            type: "string"
   ErrorResponse:
     required:
       - message

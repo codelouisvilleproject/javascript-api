@@ -93,7 +93,30 @@ function usersLogin(req, res) {
                   token: token
                 })
                 .then(item => {
-                    res.status(200).json({'token': token});
+                    console.log(item);
+                    var value = {
+                      'firstName': user.firstName,
+                      'lastName': user.lastName,
+                      'birthMonth': parseInt(user.birthDate.split('-')[0]),
+                      'birthDay': parseInt(user.birthDate.split('-')[1]),
+                      'birthYear': parseInt(user.birthDate.split('-')[2]),
+                      'email': user.email,
+                      'password': "Iznogood",
+                      'id': parseInt(user.id),
+                      'token': token                      
+                    };
+                    console.log(value);
+                    res.status(200).json({
+                      'firstName': user.firstName,
+                      'lastName': user.lastName,
+                      'birthMonth': parseInt(user.birthDate.split('-')[0]),
+                      'birthDay': parseInt(user.birthDate.split('-')[1]),
+                      'birthYear': parseInt(user.birthDate.split('-')[2]),
+                      'email': user.email,
+                      'password': "Iznogood",
+                      'id': parseInt(user.id),
+                      'token': token
+                  });
                 })
                 .catch(err => {
                   console.log(err);
