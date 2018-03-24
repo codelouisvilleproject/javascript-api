@@ -20,12 +20,13 @@ config.swaggerSecurityHandlers = {
     // Look-up the token table
     let token = scopesOrApiKey.split(' ')[1];
     if (token) {
+      console.log("token_auth:token: " + token);
       db.authtokens.findOne({ where: {token: token} })
-        .then(token => {
+        .then(auth_token => {
             // add the user object to the request.
-          console.log("token_auth:token: " + token);
-          if (token) {
-            req.user = token.user;
+          console.log("token_auth:auth_token: " + auth_token);
+          if (auth_token) {
+            req.auth_token = auth_token;
             callback();
             return;
           } else {
