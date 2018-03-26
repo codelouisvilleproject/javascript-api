@@ -23,6 +23,13 @@ function usersGet(req, res) {
         'lastName',
         'birthDate',
         'email',
+        'bio',
+        'address1',
+        'address2',
+        'city',
+        'state',
+        'zip',
+        'weight',
         'id'
       ]
     })
@@ -34,6 +41,13 @@ function usersGet(req, res) {
           birthDay: parseInt(user.birthDate.slice(8,10)),
           birthYear: parseInt(user.birthDate.slice(0,4)),
           email: user.email,
+          bio: user.bio,
+          address1: user.address1,
+          address2: user.address2,
+          city: user.city,
+          state: user.state,
+          zip: user.zip,
+          weight: user.weight,
           id: parseInt(user.id)
       }));
       res.json(formattedUsers);
@@ -57,7 +71,14 @@ function userGet(req, res) {
             'birthDay': parseInt(user.birthDate.split('-')[1]),
             'birthYear': parseInt(user.birthDate.split('-')[2]),
             'email': user.email,
-            'id': parseInt(user.id),
+            'bio': user.bio,
+            'address1': user.address1,
+            'address2': user.address2,
+            'city': user.city,
+            'state': user.state,
+            'zip': user.zip,
+            'weight': user.weight,
+            'id': parseInt(user.id)
         });
       } else {
         res.json({'message': 'User not found'}, 404);
@@ -130,7 +151,23 @@ function usersPut(req, res) {
             console.log(newInfo);
             user.update(newInfo)
             .then(() => {
-              res.json({'message': 'OK'}, 200);
+              res.status(200).json({
+                'firstName': user.firstName,
+                'lastName': user.lastName,
+                'birthMonth': parseInt(user.birthDate.split('-')[0]),
+                'birthDay': parseInt(user.birthDate.split('-')[1]),
+                'birthYear': parseInt(user.birthDate.split('-')[2]),
+                'email': user.email,
+                'bio': user.bio,
+                'address1': user.address1,
+                'address2': user.address2,
+                'city': user.city,
+                'state': user.state,
+                'zip': user.zip,
+                'weight': user.weight,
+                'id': parseInt(user.id),
+                'token': token
+              });
             })
             .catch(err => {
               console.log(err);
@@ -171,6 +208,13 @@ function usersLogin(req, res) {
                       'birthDay': parseInt(user.birthDate.split('-')[1]),
                       'birthYear': parseInt(user.birthDate.split('-')[2]),
                       'email': user.email,
+                      'bio': user.bio,
+                      'address1': user.address1,
+                      'address2': user.address2,
+                      'city': user.city,
+                      'state': user.state,
+                      'zip': user.zip,
+                      'weight': user.weight,
                       'id': parseInt(user.id),
                       'token': token
                   });
