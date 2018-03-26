@@ -126,6 +126,26 @@ paths:
             $ref: "#/definitions/ErrorResponse"    
   /users/{userId}:
     x-swagger-router-controller: userController
+    get:
+      description: Handles GET for /users in order to fetch an existing user
+      operationId: userGet
+      parameters:
+        - name: userId
+          in: path
+          description: The id of the user to fetch
+          required: true
+          type: integer
+          format: int64      
+      responses:
+        "200":
+          description: Success
+          schema:
+            # a pointer to a definition
+            $ref: "#/definitions/UserWithId"
+        default:
+          description: Error
+          schema:
+            $ref: "#/definitions/ErrorResponse"
     put:
       description: Handles PUT for /users in order to update an existing user
       security:
