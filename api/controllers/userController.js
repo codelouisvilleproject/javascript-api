@@ -52,9 +52,17 @@ function usersPut(req, res) {
   var birthYear = req.swagger.params.userInfo.value.birthYear;
   var birthDate = util.format('%d-%d-%d,', birthYear, birthMonth, birthDay);
   var email = req.swagger.params.userInfo.value.email;
-  
+  var password = req.swagger.params.userInfo.value.password;
+  var bio = req.swagger.params.userInfo.value.bio;
+  var address1 = req.swagger.params.userInfo.value.address1;
+  var address2 = req.swagger.params.userInfo.value.address2;
+  var city = req.swagger.params.userInfo.value.city;
+  var state = req.swagger.params.userInfo.value.state;
+  var zip = req.swagger.params.userInfo.value.zip;
+  var weight = req.swagger.params.userInfo.value.weight;
+
   //authorisation: check if ids match
-  if (id != req.user.id) {
+  if (id != req.auth_token.user_id) {
     res.json({'message': 'User not authorized'}, 403);
   } else {
     if ((birthDay>0 && birthDay<32) && (birthMonth>0 && birthMonth<13) && birthYear) {
@@ -62,12 +70,43 @@ function usersPut(req, res) {
       db.users.findById(id)
         .then(user => {
           if (user) {
-            user.update({
+            let newInfo = {
               firstName: firstName,
               lastName: lastName,
-              email: email,
               birthDate: Date.parse(birthDate)
-            })
+            };
+            if (password) {
+              bcrypt.hash(password, 10)
+                .then(hash => {
+                  newInfo.hashword = hash;
+                });
+            }
+            if (email) {
+              newInfo.email = email;
+            }
+            if (bio) {
+              newInfo.bio = bio;
+            }
+            if (address1) {
+              newInfo.address1 = address1;
+            }
+            if (address2) {
+              newInfo.address2 = address2;
+            }
+            if (city) {
+              newInfo.city = city;
+            }
+            if (state) {
+              newInfo.state = state;
+            }
+            if (zip) {
+              newInfo.zip = zip;
+            }
+            if (weight) {
+              newInfo.weight = weight;
+            }
+            console.log(newInfo);
+            user.update(newInfo)
             .then(() => {
               res.json({'message': 'OK'}, 200);
             })
@@ -143,7 +182,6 @@ function usersSignup(req, res) {
   var birthDate  = util.format('%d-%d-%d,', birthYear, birthMonth, birthDay);
   var email      = req.swagger.params.userInfo.value.email;
   var password   = req.swagger.params.userInfo.value.password;
-  //TODO add other profile fields
 
   if (email && password && firstName && lastName && ((birthDay>0 && birthDay<32) && (birthMonth>0 && birthMonth<13) && birthYear)) {
     //Create hash from password
@@ -178,7 +216,7 @@ function usersSignup(req, res) {
 }
 
 function usersLogout(req, res) {
-  let token = req.headers.authorization;
+  let token = req.auth_token.token; //was req.headers.authorization;
   if (token) {
     //Delete token from auth_token table
     db.authtokens.destroy({ where: {token: token} })
