@@ -47,7 +47,7 @@ function usersGet(req, res) {
           city: user.city,
           state: user.state,
           zip: user.zip,
-          weight: user.weight,
+          weight: user.weight || 0,
           id: parseInt(user.id)
       }));
       res.json(formattedUsers);
@@ -77,7 +77,7 @@ function userGet(req, res) {
             'city': user.city,
             'state': user.state,
             'zip': user.zip,
-            'weight': user.weight,
+            'weight': user.weight || 0,
             'id': parseInt(user.id)
         });
       } else {
@@ -164,7 +164,7 @@ function usersPut(req, res) {
                 'city': user.city,
                 'state': user.state,
                 'zip': user.zip,
-                'weight': user.weight,
+                'weight': user.weight || 0,
                 'id': parseInt(user.id),
                 'token': token
               });
@@ -214,7 +214,7 @@ function usersLogin(req, res) {
                       'city': user.city,
                       'state': user.state,
                       'zip': user.zip,
-                      'weight': user.weight,
+                      'weight': user.weight || 0,
                       'id': parseInt(user.id),
                       'token': token
                   });
