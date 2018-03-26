@@ -18,8 +18,8 @@ config.swaggerSecurityHandlers = {
     console.log('bearerAuth:req.headers.authorization:' + req.headers.authorization);
     console.log("bearerAuth:token: " + scopesOrApiKey);
     // Look-up the token table
-    let token = scopesOrApiKey.split(' ')[1];
-    if (token) {
+    if (scopesOrApiKey) {
+      let token = scopesOrApiKey.split(' ')[1];
       console.log("token_auth:token: " + token);
       db.authtokens.findOne({ where: {token: token} })
         .then(auth_token => {

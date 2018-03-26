@@ -171,7 +171,7 @@ paths:
           description: Success
           schema:
             # a pointer to a definition
-            $ref: "#/definitions/UsersResponse"
+            $ref: "#/definitions/UserWithId"
         "401":
           description: Authentication information is missing or invalid
           schema:
@@ -260,6 +260,20 @@ definitions:
         type: "integer"
       email:
         type: "string"
+      bio:
+        type: "string"
+      address1:
+        type: "string"
+      address2:
+        type: "string"
+      city:
+        type: "string"
+      state:
+        type: "string"
+      zip:
+        type: "string"
+      weight:
+        type: "integer"
       id:
         type: "integer"
   UserWithToken:
