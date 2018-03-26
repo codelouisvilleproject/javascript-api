@@ -7,6 +7,7 @@ var crypto = require('crypto');
 const uuidV4 = require('uuid/v4');
 
 module.exports = {
+  userGet: userGet,
   usersGet: usersGet,
   usersPut: usersPut,
   usersLogin: usersLogin,
@@ -41,6 +42,27 @@ function usersGet(req, res) {
       console.log(err);
       res.json({'message': 'ERROR'}, 500);
     })
+}
+
+function userGet(req, res) {
+  var id = req.swagger.params.userId.value;
+  
+  db.users.findById(id)
+    .then(user => {
+      if (user) {
+        res.status(200).json({
+            'firstName': user.firstName,
+            'lastName': user.lastName,
+            'birthMonth': parseInt(user.birthDate.split('-')[0]),
+            'birthDay': parseInt(user.birthDate.split('-')[1]),
+            'birthYear': parseInt(user.birthDate.split('-')[2]),
+            'email': user.email,
+            'id': parseInt(user.id),
+        });
+      } else {
+        res.json({'message': 'User not found'}, 404);
+      }
+    });
 }
 
 function usersPut(req, res) {
